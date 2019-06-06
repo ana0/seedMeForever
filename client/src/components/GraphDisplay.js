@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import P5Wrapper from './P5Wrapper'
-import './index.css'
-import { apiUrl } from './env'
+// import P5Wrapper from './P5Wrapper'
+import './../index.css'
+import { apiUrl } from './../env'
 
 let nodes = [
   { x: 50, y: 20 },
@@ -61,12 +61,13 @@ class GraphDisplay extends Component {
   }
 
   render() {
-    return (
-      <P5Wrapper
-        p5Props={{ nodes: this.state.nodes, links: this.state.links }}
-        onSetAppState={this.onSetAppState}
-      />
-    );
+    return <div></div>
+    //(
+      // <P5Wrapper
+      //   p5Props={{ nodes: this.state.nodes, links: this.state.links }}
+      //   onSetAppState={this.onSetAppState}
+      // />
+    //);
   }
 }
 

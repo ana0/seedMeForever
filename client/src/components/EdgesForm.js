@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import './index.css'
-import { apiUrl } from './env'
+import './../index.css'
+import { apiUrl } from './../env'
 
 class FormRow extends Component {
   constructor(props) {
