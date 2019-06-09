@@ -21,6 +21,7 @@
     "bcrypt": "^3.0.4",
     "body-parser": "^1.18.3",
     "cors": "^2.8.5",
+    "csv": "^5.1.1",
     "express": "^4.16.4",
     "jsonwebtoken": "^8.5.0",
     "sqlite3": "^4.0.6"
