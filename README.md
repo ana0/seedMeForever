@@ -4,7 +4,7 @@ A memorial to biodiversity loss on the p2p web
 
 ### to do
 
-- [ ] do you want to participate
+- [x] do you want to participate
 - [x] api call for random animal
 - [ ] wrap image api
 - [ ] save animal photos
