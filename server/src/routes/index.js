@@ -5,6 +5,7 @@ const login = require('../controllers/user')
 const authMiddleware = require('../middleware/auth')
 const animals = require('../controllers/animals')
 const uploadPath = require('../config/env').uploadPath
+const imageFilter = require('../lib/images').imageFilter
 
 const upload = multer({ dest: uploadPath, limits: { fileSize: 10000000 }, fileFilter: imageFilter });
 
@@ -25,6 +26,6 @@ module.exports = (app) => {
 
   app.get('/animals', (req, res) => animals.readAnimals(req, res, false))
   app.get('/animals/:id', (req, res) => res.status(200).json('Requested an individual animal'))
-  app.post('/animals/:id', upload.single('animal'), (req, res) => res.status(200).json('Requested an individual animal'))
+  app.post('/animals/:id', upload.single('animal'), animals.createAnimal)
 }
 

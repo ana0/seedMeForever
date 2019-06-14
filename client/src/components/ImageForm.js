@@ -7,6 +7,7 @@ class ImageForm extends Component {
     super(props);
     this.state = {
       animal: '',
+      id: '',
       file: null,
       humanName: ''
     };
@@ -23,27 +24,30 @@ class ImageForm extends Component {
         return response.json()
       })
       .then(data => {
-        this.setState({ animal: data.name })
+        this.setState({ animal: data.name, id: data.id })
       })
 
   }
 
   onFilesAdded(event) {
-    const file = event.target.file;
+    console.log('called file added')
+    const file = event.target.files[0];
     console.log(file)
-    this.setState({ file: file })
+    this.setState({ file, })
   }
 
   handleUpload(event) {
     event.preventDefault();
     const data = new FormData()
-    data.append('file', this.state.file)
+    console.log(this.state.file)
+    data.append('animal', this.state.file)
     data.append('humanName', this.state.humanName)
-    return fetch(`${apiUrl}/animal/`, {
+    console.log(data)
+    return fetch(`${apiUrl}/animals/${this.state.id}`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
+      // headers: {
+      //   'Content-Type': 'application/json'
+      // },
       body: data,
     })
     .then(response => {
@@ -57,19 +61,19 @@ class ImageForm extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit.bind(this)}>
+      <form>
         <div>
             <p>{this.state.animal}</p>
             <br />
             <input
               type="file"
-              name="fileToUpload"
-              id="fileToUpload"
-              onChange={this.onFilesAdded} />
+              name="animal"
+              onChange={this.onFilesAdded.bind(this)} />
+            <br />
             <input
               type="button"
               value="Yes"
-              onClick={this.props.handleUpload}
+              onClick={this.handleUpload.bind(this)}
               />
           </div>
       </form>
