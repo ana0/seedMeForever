@@ -13,7 +13,8 @@ const readAnimals = (req, res, admin)  => {
   //res.status(200).json('Unimplemented Animals endpoint')
 }
 
-const createAnimals = (req, res) => {
+const createAnimal = (req, res) => {
+  if (!req.file) throw new Error('Must have animal file!')
   res.status(200).json('Unimplemented Animals endpoint')
 }
 
@@ -27,7 +28,7 @@ const deleteAnimals = (req, res)  => {
 
 module.exports = {
   readAnimals,
-  createAnimals,
+  createAnimal,
   updateAnimals,
   deleteAnimals
 }

@@ -1,8 +1,12 @@
 const bodyParser = require('body-parser')
 const cors = require('cors')
+const multer = require('multer')
 const login = require('../controllers/user')
 const authMiddleware = require('../middleware/auth')
 const animals = require('../controllers/animals')
+const uploadPath = require('../config/env').uploadPath
+
+const upload = multer({ dest: uploadPath, limits: { fileSize: 10000000 } });
 
 module.exports = (app) => {
   app.use(cors())
@@ -21,5 +25,6 @@ module.exports = (app) => {
 
   app.get('/animals', (req, res) => animals.readAnimals(req, res, false))
   app.get('/animals/:id', (req, res) => res.status(200).json('Requested an individual animal'))
+  app.post('/animals/:id', upload.single('animal'), (req, res) => res.status(200).json('Requested an individual animal'))
 }
 

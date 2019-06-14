@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import './../index.css'
-import { apiUrl } from './../env'
 
 class ConsentForm extends Component {
   constructor(props) {
@@ -27,40 +26,9 @@ class ConsentForm extends Component {
     };
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
-    if (!this.state.public) { alert('Please enter your password!'); return }
-    this.handleClick(this.state.currentlySelectedAnimal)
-    .then(() => {
-      if (this.state.discoveredKeys.length === 0) { alert('No animals to submit!'); return; }
-      if (this.state.hasError) { alert('Cannot submit with errors!') }
-      else { 
-        const data = { edges: this.state.discoveredKeys, private: this.state.private }
-        return fetch(`${apiUrl}edges`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(data),
-        })
-        .then(response => {
-          console.log(response)
-          this.setState({
-            error: '',
-            private: '',
-            public: '',
-            discoveredKeys: [],
-            disabled: false
-          })
-          return alert('Success! Your discovered animals were submitted')
-        })
-      }
-    })
-  }
-
   render() {
     return (
-      <form onSubmit={this.handleSubmit.bind(this)}>
+      <form>
         <div>
             <p style={{ whiteSpace: 'pre-wrap' }}>{this.state.instructions}</p>
             <br />

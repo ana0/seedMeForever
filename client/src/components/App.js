@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Route, Switch } from 'react-router-dom';
 import './../index.css';
 import ConsentForm from './ConsentForm';
+import ImageForm from './ImageForm';
 
 // class Graph extends Component {
 //   render() {
@@ -31,6 +32,9 @@ class Home extends Component {
       <h2>seed me forever</h2>
       { !this.state.consent ?
         <ConsentForm handleConsent={this.handleConsent.bind(this)}/> :
+        null }
+      { this.state.consent ?
+        <ImageForm handleConsent={this.handleConsent.bind(this)}/> :
         null }
     </div>
     )
