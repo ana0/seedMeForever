@@ -6,7 +6,7 @@ const authMiddleware = require('../middleware/auth')
 const animals = require('../controllers/animals')
 const uploadPath = require('../config/env').uploadPath
 
-const upload = multer({ dest: uploadPath, limits: { fileSize: 10000000 } });
+const upload = multer({ dest: uploadPath, limits: { fileSize: 10000000 }, fileFilter: imageFilter });
 
 module.exports = (app) => {
   app.use(cors())

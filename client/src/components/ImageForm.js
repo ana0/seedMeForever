@@ -6,7 +6,9 @@ class ImageForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      animal: ''
+      animal: '',
+      file: null,
+      humanName: ''
     };
   }
 
@@ -26,35 +28,31 @@ class ImageForm extends Component {
 
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
+  onFilesAdded(event) {
+    const file = event.target.file;
+    console.log(file)
+    this.setState({ file: file })
+  }
 
-    this.handleClick(this.state.currentlySelectedAnimal)
-    .then(() => {
-      if (this.state.discoveredKeys.length === 0) { alert('No animals to submit!'); return; }
-      if (this.state.hasError) { alert('Cannot submit with errors!') }
-      else { 
-        const data = { edges: this.state.discoveredKeys, private: this.state.private }
-        return fetch(`${apiUrl}edges`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(data),
-        })
-        .then(response => {
-          console.log(response)
-          this.setState({
-            error: '',
-            private: '',
-            public: '',
-            discoveredKeys: [],
-            disabled: false
-          })
-          return alert('Success! Your discovered animals were submitted')
-        })
-      }
+  handleUpload(event) {
+    event.preventDefault();
+    const data = new FormData()
+    data.append('file', this.state.file)
+    data.append('humanName', this.state.humanName)
+    return fetch(`${apiUrl}/animal/`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: data,
     })
+    .then(response => {
+      console.log(response)
+      this.setState({
+      })
+      return alert('Success! Your discovered animals were submitted')
+    })
+
   }
 
   render() {
@@ -64,9 +62,14 @@ class ImageForm extends Component {
             <p>{this.state.animal}</p>
             <br />
             <input
+              type="file"
+              name="fileToUpload"
+              id="fileToUpload"
+              onChange={this.onFilesAdded} />
+            <input
               type="button"
               value="Yes"
-              onClick={this.props.handleConsent}
+              onClick={this.props.handleUpload}
               />
           </div>
       </form>

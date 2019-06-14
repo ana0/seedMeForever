@@ -10,12 +10,11 @@ const readAnimals = (req, res, admin)  => {
       res.status(200).json(animal)
     })
   })
-  //res.status(200).json('Unimplemented Animals endpoint')
 }
 
 const createAnimal = (req, res) => {
   if (!req.file) throw new Error('Must have animal file!')
-  res.status(200).json('Unimplemented Animals endpoint')
+  res.status(200).json('Uploaded animal file')
 }
 
 const updateAnimals = (req, res)  => {
