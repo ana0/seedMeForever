@@ -11,10 +11,7 @@ const db = new sqlite3.Database(':memory:', (err) => {
 db.serialize(async () => {
   db.run("CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY ASC, username TEXT, password TEXT)");
   db.run("CREATE TABLE IF NOT EXISTS animals (id INTEGER PRIMARY KEY ASC, name TEXT)");
-  // db.run("CREATE TABLE IF NOT EXISTS edges " +
-  // 	"(id INTEGER PRIMARY KEY ASC, fromId INT, toId INT," +
-  // 	"FOREIGN KEY(fromId) REFERENCES nodes(id), FOREIGN KEY(toId) REFERENCES nodes(id))");
-  // db.run("CREATE UNIQUE INDEX unique_edge ON edges(toId, fromId);");
+  db.run("CREATE TABLE IF NOT EXISTS archive (id INTEGER PRIMARY KEY ASC, scientificName TEXT, name TEXT, filename TEXT");
 });
 
 module.exports = db

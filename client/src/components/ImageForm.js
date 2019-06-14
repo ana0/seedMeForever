@@ -24,7 +24,7 @@ class ImageForm extends Component {
         return response.json()
       })
       .then(data => {
-        this.setState({ animal: data.name, id: data.id })
+        this.setState({ animal: data.name.toLowerCase(), id: data.id })
       })
 
   }
@@ -36,18 +36,23 @@ class ImageForm extends Component {
     this.setState({ file, })
   }
 
+  onTextChange(event) {
+    const humanName = event.target.value.toLowerCase();
+    console.log(humanName)
+    this.setState({ humanName })
+  }
+
   handleUpload(event) {
     event.preventDefault();
     const data = new FormData()
     console.log(this.state.file)
     data.append('animal', this.state.file)
     data.append('humanName', this.state.humanName)
+    data.append('scientificName', this.state.animal)
+    data.append('id', this.state.id)
     console.log(data)
     return fetch(`${apiUrl}/animals/${this.state.id}`, {
       method: 'POST',
-      // headers: {
-      //   'Content-Type': 'application/json'
-      // },
       body: data,
     })
     .then(response => {
@@ -64,6 +69,12 @@ class ImageForm extends Component {
       <form>
         <div>
             <p>{this.state.animal}</p>
+            <br />
+            english name: 
+            <input
+              type="text"
+              name="humanName"
+              onChange={this.onTextChange.bind(this)} />
             <br />
             <input
               type="file"

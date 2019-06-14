@@ -1,6 +1,6 @@
 const db = require('../connections/sqlite')
 
-const readAnimals = (req, res, admin)  => {
+const randAnimal = (req, res, admin)  => {
   db.get('SELECT COALESCE(MAX(id)+1, 0) AS count FROM animals', function(err, result) {
   	if (err) throw err;
     console.log(result.count)
@@ -16,7 +16,11 @@ const createAnimal = (req, res) => {
   console.log('called create')
   //console.log(req)
   if (!req.file) throw new Error('Must have animal file!')
-  res.status(200).json('Uploaded animal file')
+  db.run("INSERT INTO archive(scientificName, name, filename) VALUES (?, ?, ?)",
+    [req.body.scientificName, req.body.humanName, req.file.name], function(err) {
+      //mark animal as done
+      res.status(200).json('Uploaded animal file')
+    })
 }
 
 const updateAnimals = (req, res)  => {
@@ -28,7 +32,7 @@ const deleteAnimals = (req, res)  => {
 }
 
 module.exports = {
-  readAnimals,
+  randAnimal,
   createAnimal,
   updateAnimals,
   deleteAnimals
