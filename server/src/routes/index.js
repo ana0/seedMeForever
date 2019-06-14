@@ -8,9 +8,7 @@ const uploadPath = require('../config/env').uploadPath
 const imageFilter = require('../lib/images').imageFilter
 
 const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, uploadPath)
-  },
+  destination: uploadPath,
   filename: function (req, file, cb) {
     console.log(file.mimetype);
     cb(null, Date.now() + '.jpg') //Appending .jpg
@@ -19,7 +17,7 @@ const storage = multer.diskStorage({
   fileFilter: imageFilter
 })
 
-const upload = multer(storage)
+const upload = multer({ storage })
 
 module.exports = (app) => {
   app.use(cors())
@@ -36,8 +34,8 @@ module.exports = (app) => {
   // app.put('/admin/nodes/:id', authMiddleware, nodes.updateNode)
   // app.delete('/admin/nodes/:id', authMiddleware, nodes.deleteNode)
 
-  app.get('/animals', (req, res) => animals.randAnimal(req, res, false))
-  app.get('/animals/:id', (req, res) => res.status(200).json('Requested an individual animal'))
+  app.get('/animals', (req, res) => animals.randAnimal(req, res))
+  app.get('/animals/:id', (req, res) => animals.readAnimal(req, res))
   app.post('/animals/:id', upload.single('animal'), animals.createAnimal)
 }
 
