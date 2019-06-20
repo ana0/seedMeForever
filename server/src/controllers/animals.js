@@ -25,8 +25,8 @@ const createAnimal = async (req, res) => {
   console.log('called create')
   if (!req.file) throw new Error('Must have animal file!')
   const hash = await ipfs.pin(req.file)
-  db.run("INSERT INTO archive(scientificName, name, filename) VALUES (?, ?, ?)",
-    [req.body.scientificName, req.body.humanName, req.file.filename], function(err) {
+  db.run("INSERT INTO archive(scientificName, name, filename, hash) VALUES (?, ?, ?, ?)",
+    [req.body.scientificName, req.body.humanName, req.file.filename, hash], function(err) {
       if (err) throw err;
       console.log(req.file)
       res.status(200).json('Uploaded animal file')

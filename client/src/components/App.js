@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import './../index.css';
 import ConsentForm from './ConsentForm';
 import ImageForm from './ImageForm';
+import Display from './Display';
 
 // class Graph extends Component {
 //   render() {
@@ -54,7 +55,7 @@ class App extends Component {
       <div className="App">
         <Switch>
           <Route exact path="/" component={Home}/>
-          {/*<Route path="/graph" component={Graph}/>*/}
+          <Route path="/display" component={Display}/>
         </Switch>
       </div>
     )

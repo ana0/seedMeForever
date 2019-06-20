@@ -13,6 +13,7 @@ A memorial to biodiversity loss on the p2p web
 - [ ] api call to return rand file
 - [ ] photo upload is a dropzone
 - [x] human name
-- [ ] upload animal photos to ipfs
+- [x] upload animal photos to ipfs
+- [ ] more artful use of ipfs
 - [ ] display of ipfs photos
 - [ ] most recent animal displays next
