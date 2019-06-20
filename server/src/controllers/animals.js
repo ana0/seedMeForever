@@ -1,4 +1,5 @@
 const db = require('../connections/sqlite')
+const ipfs = require('../lib/ipfs')
 
 const randAnimal = (req, res)  => {
   db.get('SELECT COALESCE(MAX(id)+1, 0) AS count FROM animals', function(err, result) {
@@ -20,10 +21,10 @@ const readAnimal = (req, res)  => {
   })
 }
 
-const createAnimal = (req, res) => {
+const createAnimal = async (req, res) => {
   console.log('called create')
-  console.log(req)
   if (!req.file) throw new Error('Must have animal file!')
+  const hash = await ipfs.pin(req.file)
   db.run("INSERT INTO archive(scientificName, name, filename) VALUES (?, ?, ?)",
     [req.body.scientificName, req.body.humanName, req.file.filename], function(err) {
       if (err) throw err;
