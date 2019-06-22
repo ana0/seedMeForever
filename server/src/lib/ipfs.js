@@ -6,7 +6,7 @@ const pin = (animal) => {
     fs.readFile(animal.path, (err, data) => {
       //const buf = Buffer.from(data) // Convert data into buffer
       console.log(data)
-      ipfs.add(buf, { pin: true }, (err, result) => { // Upload buffer to IPFS
+      ipfs.add(data, { pin: true }, (err, result) => { // Upload buffer to IPFS
         if (err) {
           console.error(err)
           rej(err)

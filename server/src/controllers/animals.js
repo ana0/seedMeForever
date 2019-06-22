@@ -28,7 +28,7 @@ const createAnimal = async (req, res) => {
   db.run("INSERT INTO archive(scientificName, name, filename, hash) VALUES (?, ?, ?, ?)",
     [req.body.scientificName, req.body.humanName, req.file.filename, hash], function(err) {
       if (err) throw err;
-      console.log(req.file)
+      console.log(hash)
       res.status(200).json('Uploaded animal file')
     })
 }
