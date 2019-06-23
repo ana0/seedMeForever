@@ -5,11 +5,11 @@ import ConsentForm from './ConsentForm';
 import ImageForm from './ImageForm';
 import Display from './Display';
 
-// class Graph extends Component {
+// class Viewer extends Component {
 //   render() {
 //     return (
 //       <div>
-//         <GraphDisplay />
+//         <Display />
 //       </div>
 //     )
 //   }
