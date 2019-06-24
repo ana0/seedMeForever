@@ -1,2 +1,2 @@
 [build.environment]
-  REACT_APP_API_URL = "https://isthisa.computer/"
+  REACT_APP_API_URL = "https://isthisa.computer"
