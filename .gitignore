@@ -19,7 +19,6 @@
 .fuse*
 *.txt
 *.log
-*.csv
 *.notes
 *.db
 
