@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import P5Wrapper from './P5Wrapper'
+import ThreeScene from './ThreeScene'
 import './../index.css'
 import { apiUrl } from './../env'
 
@@ -41,7 +41,7 @@ class Display extends Component {
 
   render() {
     return (
-      <P5Wrapper
+      <ThreeScene
         p5Props={{ nodes: this.state.nodes, links: this.state.links }}
         onSetAppState={this.onSetAppState}
       />
