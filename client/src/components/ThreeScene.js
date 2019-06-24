@@ -62,13 +62,13 @@ class ThreeScene extends Component{
     const picGeo = new THREE.PlaneGeometry(300,300);
     THREE.ImageUtils.crossOrigin = ''; //Need this to pull in crossdomain images from AWS
     let pic;
-    const textTexture = new THREE.TextureLoader().load(`${apiUrl}/archive/1`, (tex) => {
+    const picTexture = new THREE.TextureLoader().load(`${apiUrl}/archive/1`, (tex) => {
       tex.needsUpdate = true;
       pic.scale.set(1.0, tex.image.height / tex.image.width, 1.0);
     });
     //const picMaterial = new THREE.MeshLambertMaterial({color: 0xbbffff, opacity: 1, map: picTexture, transparent: true})
     const picMaterial = new THREE.MeshLambertMaterial({color: 0xbbffff, opacity: 1, map: picTexture, transparent: true, blending: THREE.AdditiveBlending})
-    pic = new THREE.Mesh(textGeo,textMaterial);
+    pic = new THREE.Mesh(picGeo,picMaterial);
     pic.position.z = 800;
     var randx = this.random((this.width/6) * -1, this.width/6);
     var randy = this.random((this.height/6) * -1, this.height/6);
