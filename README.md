@@ -10,10 +10,13 @@ A memorial to biodiversity loss on the p2p web
 - [x] test filefilter
 - [ ] safe from sql injection
 - [ ] make sure animal can only be entered once
+- [ ] handle if ipfs is down
+- [ ] handle if the such photo is requested
 - [x] api call to return rand file
 - [ ] photo upload is a dropzone
 - [x] human name
 - [x] upload animal photos to ipfs
 - [ ] more artful use of ipfs
-- [ ] display of ipfs photos
+- [x] display of ipfs photos
+- [ ] display of ipfs hash/data blob
 - [ ] most recent animal displays next

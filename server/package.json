@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ana0/socialGram.git"
+    "url": "git+https://github.com/ana0/seedMeForever.git"
   },
   "author": "ana0",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ana0/socialGram/issues"
+    "url": "https://github.com/ana0/seedMeForever/issues"
   },
-  "homepage": "https://github.com/ana0/socialGram#readme",
+  "homepage": "https://github.com/ana0/seedMeForever#readme",
   "dependencies": {
     "bcrypt": "^3.0.4",
     "body-parser": "^1.18.3",

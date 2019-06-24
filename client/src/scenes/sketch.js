@@ -23,12 +23,7 @@ export default function (p) {
   }
 
   p.draw = () => {
-    // if (p.second() %  === 0) {
-    //   console.log('drawing')
-    //   p.image(bird, 100, 0);
-    // // }
     p.image(bird, 100, 0);
-    //p.image(bird, 0, 0)
     flock.run();
   }
 
@@ -115,26 +110,15 @@ export default function (p) {
 
   Boid.prototype.render = function() {
     // Draw a triangle rotated in the direction of velocity
-    //let theta = this.velocity.heading() + p.radians(90);
     if (this.rotationDir) {
       this.rotation = this.rotation + (this.velocity.x*2)
     } else {
       this.rotation = this.rotation - (this.velocity.x*2)
     }
     let theta = p.radians(this.rotation)
-    // p.fill(127);
-    // p.stroke(200);
-    // console.log('x: ', this.position.x)
-    // console.log('y: ', this.position.y)
     p.push();
     p.translate(this.position.x, this.position.y);
     p.rotate(theta);
-    // p.beginShape();
-    // p.vertex(0, -this.r * 2);
-    // p.vertex(-this.r, this.r * 2);
-    // p.vertex(this.r, this.r * 2);
-    // p.endShape(p.CLOSE);
-    //p.imageMode('CENTER');
     p.tint(200, 200, 231, 206)
     p.image(img, 0, 0, 1500, 1500);
     p.pop();
@@ -142,25 +126,16 @@ export default function (p) {
 
   // Wraparound
   Boid.prototype.borders = function() {
-    // console.log('called borders')
     if (this.position.x < -this.r) {
-      // console.log('this.position.x < -this.r')
-      // console.log(this.position.x)
       this.position.x = p.width + this.r;
     }
     if (this.position.y < -this.r) {
-      // console.log('this.position.y < -this.r')
-      // console.log(this.position.y)
       this.position.y = p.height + this.r;
     }
     if (this.position.x > p.width + this.r) {
-      // console.log('this.position.x > p.width + this.r')
-      // console.log(this.position.x)
       this.position.x = -this.r;
     }
     if (this.position.y > p.height + this.r) {
-      // console.log('this.position.y > p.height + this.r')
-      // console.log(this.position.y)
       this.position.y = -this.r;
     }
   }

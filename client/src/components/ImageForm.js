@@ -20,7 +20,6 @@ class ImageForm extends Component {
       "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
     }})
       .then(response => {
-        console.log(`${apiUrl}/animals`)
         return response.json()
       })
       .then(data => {
@@ -83,7 +82,7 @@ class ImageForm extends Component {
             <br />
             <input
               type="button"
-              value="Yes"
+              value="Pin"
               onClick={this.handleUpload.bind(this)}
               />
           </div>

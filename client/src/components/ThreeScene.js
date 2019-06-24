@@ -1,19 +1,17 @@
 import React, { Component } from 'react';
 import * as THREE from 'three';
-import smoke from '../assets/Smoke-Element.png'
+import smoke from '../assets/Smoke-Element.png';
+import { apiUrl } from './../env'
 
 class ThreeScene extends Component{
   componentDidMount(){
     const width = this.mount.clientWidth
     const height = this.mount.clientHeight
-    console.log(width, height)
     this.width = width;
     this.height = height;
 
-    //ADD SCENE
     this.scene = new THREE.Scene()
 
-    //ADD CAMERA
     this.camera = new THREE.PerspectiveCamera(
       75,
       width / height,
@@ -22,7 +20,6 @@ class ThreeScene extends Component{
     )
     this.camera.position.z = 1000
 
-    //ADD RENDERER
     this.renderer = new THREE.WebGLRenderer({ antialias: true })
     this.renderer.setClearColor('#ffffff')
     this.renderer.setSize(width, height)
@@ -46,10 +43,10 @@ class ThreeScene extends Component{
   createSmoke() {
     const smokeTexture = new THREE.TextureLoader().load(smoke);
     const smokeMaterial = new THREE.MeshLambertMaterial({color: 0xd3dbe8, map: smokeTexture, transparent: true});
-    const smokeGeo = new THREE.PlaneGeometry(300,300);
+    const smokeGeo = new THREE.PlaneGeometry(300, 300);
     for (let p = 0; p < 100; p++) {
-      var particle = new THREE.Mesh(smokeGeo,smokeMaterial);
-      particle.position.set(Math.random()*500-250,Math.random()*500-250,Math.random()*1000-100);
+      var particle = new THREE.Mesh(smokeGeo, smokeMaterial);
+      particle.position.set(Math.random()*500-250, Math.random()*500-250, Math.random()*1000-100);
       particle.rotation.z = Math.random() * 360;
       this.scene.add(particle);
       this.smokeParticles.push(particle);
@@ -62,23 +59,23 @@ class ThreeScene extends Component{
   }
 
   createAnimal() {
-    const textGeo = new THREE.PlaneGeometry(300,300);
+    const picGeo = new THREE.PlaneGeometry(300,300);
     THREE.ImageUtils.crossOrigin = ''; //Need this to pull in crossdomain images from AWS
-    let text;
-    const textTexture = new THREE.TextureLoader().load('http://localhost:8888/archive/1', (tex) => {
+    let pic;
+    const textTexture = new THREE.TextureLoader().load(`${apiUrl}/archive/1`, (tex) => {
       tex.needsUpdate = true;
-      text.scale.set(1.0, tex.image.height / tex.image.width, 1.0);
+      pic.scale.set(1.0, tex.image.height / tex.image.width, 1.0);
     });
-    //const textMaterial = new THREE.MeshLambertMaterial({color: 0xbbffff, opacity: 1, map: textTexture, transparent: true})
-    const textMaterial = new THREE.MeshLambertMaterial({color: 0xbbffff, opacity: 1, map: textTexture, transparent: true, blending: THREE.AdditiveBlending})
-    text = new THREE.Mesh(textGeo,textMaterial);
-    text.position.z = 800;
+    //const picMaterial = new THREE.MeshLambertMaterial({color: 0xbbffff, opacity: 1, map: picTexture, transparent: true})
+    const picMaterial = new THREE.MeshLambertMaterial({color: 0xbbffff, opacity: 1, map: picTexture, transparent: true, blending: THREE.AdditiveBlending})
+    pic = new THREE.Mesh(textGeo,textMaterial);
+    pic.position.z = 800;
     var randx = this.random((this.width/6) * -1, this.width/6);
     var randy = this.random((this.height/6) * -1, this.height/6);
-    text.position.x = randx;
-    text.position.y = randy;
-    this.animals.push({ mesh: text, opacity: .0001, lastOpacity: 0 })
-    this.scene.add(text);
+    pic.position.x = randx;
+    pic.position.y = randy;
+    this.animals.push({ mesh: pic, opacity: .0001, lastOpacity: 0 })
+    this.scene.add(pic);
   }
 
   evolveSmoke() {
@@ -90,7 +87,6 @@ class ThreeScene extends Component{
 
   fadeAnimals() {
     var sp = this.animals.length;
-    console.log(sp)
     while(sp--) {
       if (this.animals[sp].opacity >= 1) {
         this.animals[sp].lastOpacity = 1
