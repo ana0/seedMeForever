@@ -9,9 +9,12 @@ A memorial to biodiversity loss on the p2p web
 - [x] upload animal photos
 - [x] test filefilter
 - [ ] safe from sql injection
-- [ ] make sure animal can only be entered once
-- [ ] handle if ipfs is down
-- [ ] handle if the such photo is requested
+- [x] make sure animal can only be entered once
+- [x] in server/animals read and create belong in archive
+- [x] handle if ipfs is down
+- [x] handle if no such photo is requested
+- [ ] user form error handling
+- [ ] form styling
 - [x] api call to return rand file
 - [ ] photo upload is a dropzone
 - [x] human name

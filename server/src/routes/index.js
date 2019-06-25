@@ -29,8 +29,8 @@ module.exports = (app) => {
   app.post('/login', login)
 
   app.get('/animals', animals.randAnimal)
-  app.get('/animals/:id', animals.readAnimal)
-  app.post('/animals/:id', upload.single('animal'), animals.createAnimal)
+  app.get('/animals/:id', archive.readArchive)
+  app.post('/animals/:id', upload.single('animal'), archive.createArchive)
 
   app.get('/archive', archive.randArchive)
   app.get('/archive/:id', archive.readFile)

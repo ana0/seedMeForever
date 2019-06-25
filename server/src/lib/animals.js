@@ -11,7 +11,7 @@ const parser = csv.parse({
 });
 
 const animalTransform = (line, cb) => {
-  db.run("INSERT INTO animals(name) VALUES (?)", line.scientificName, (err) => {
+  db.run("INSERT INTO animals(name, archiveId) VALUES (?, ?)", [line.scientificName, null], (err) => {
     console.log(line.scientificName)
     if (err) cb(e);
     cb(null)

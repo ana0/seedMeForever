@@ -9,7 +9,7 @@ const pin = (animal) => {
       ipfs.add(data, { pin: true }, (err, result) => { // Upload buffer to IPFS
         if (err) {
           console.error(err)
-          rej(err)
+          return rej(err)
         }
         let url = `https://ipfs.io/ipfs/${result[0].hash}`
         res(url)
