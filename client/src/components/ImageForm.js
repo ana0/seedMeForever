@@ -73,7 +73,7 @@ class ImageForm extends Component {
       }
 
     })
-    .catch(err => alert('Something is broken x_x please try again later'))
+    .catch(err => alert(err.toString()))
 
   }
 
