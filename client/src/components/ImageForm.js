@@ -46,7 +46,7 @@ class ImageForm extends Component {
 
   handleUpload(event) {
     event.preventDefault();
-    //event.nativeEvent.stopImmediatePropagation();
+    event.nativeEvent.stopImmediatePropagation();
     if (!this.state.file) {
       return alert('Please attach an image of your animal')
     }
