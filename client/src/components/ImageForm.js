@@ -64,15 +64,16 @@ class ImageForm extends Component {
       body: data,
     })
     .then(response => {
+      this.props.handleConsent(false)
+      console.log(`${apiUrl}/animals/${this.state.id}`)
       if (response.status === 200) {
-        alert('Success! Your animal was submitted')
-        this.props.handleConsent(false)
+        return alert('Success! Your animal was submitted')
       } else {
-        alert('Something is broken x_x please try again later')
-        this.props.handleConsent(false)
+        return alert('Something is broken x_x please try again later')
       }
 
     })
+    .catch(err => alert('Something is broken x_x please try again later'))
 
   }
 
