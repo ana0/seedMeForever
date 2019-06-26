@@ -46,17 +46,29 @@ class ImageForm extends Component {
 
   handleUpload(event) {
     event.preventDefault();
+    if (!this.state.file) {
+      return alert('Please attach an image of your animal')
+    }
+    if (!this.state.humanName) {
+      return alert("Please lookup your animal's common English name")
+    }
     const data = new FormData()
     data.append('animal', this.state.file)
     data.append('humanName', this.state.humanName)
     data.append('scientificName', this.state.animal)
     data.append('id', this.state.id)
+    data.append('comments', this.state.comments)
     return fetch(`${apiUrl}/animals/${this.state.id}`, {
       method: 'POST',
       body: data,
     })
     .then(response => {
-      return alert('Success! Your animal was submitted')
+      if (response.status === 200) {
+        alert('Success! Your animal was submitted')
+      } else {
+        alert('Something is broken x_x please try again later')
+      }
+      this.props.handleConsent(false)
     })
 
   }

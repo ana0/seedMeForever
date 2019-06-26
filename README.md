@@ -13,7 +13,7 @@ A memorial to biodiversity loss on the p2p web
 - [x] in server/animals read and create belong in archive
 - [x] handle if ipfs is down
 - [x] handle if no such photo is requested
-- [ ] user form error handling
+- [x] user form error handling
 - [x] form styling
 - [x] api call to return rand file
 - [ ] photo upload is a dropzone

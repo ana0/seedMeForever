@@ -13,19 +13,19 @@ class Home extends Component {
     };
   }
 
-  handleConsent() {
-    this.setState({ consent: true })
+  handleConsent(boolean) {
+    this.setState({ consent: boolean })
   }
 
   render() {
     return (
-    <div>
+    <div className="content">
       <h2>seed me forever</h2>
       { !this.state.consent ?
-        <ConsentForm handleConsent={this.handleConsent.bind(this)}/> :
+        <ConsentForm handleConsent={this.handleConsent.bind(this)} /> :
         null }
       { this.state.consent ?
-        <ImageForm /> :
+        <ImageForm handleConsent={this.handleConsent.bind(this)} /> :
         null }
     </div>
     )

@@ -22,7 +22,7 @@ class ConsentForm extends Component {
               className="instructionsButton"
               type="button"
               value="Yes"
-              onClick={this.props.handleConsent}
+              onClick={() => this.props.handleConsent(true)}
               />
           </div>
       </form>
