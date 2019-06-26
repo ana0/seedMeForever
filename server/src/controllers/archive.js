@@ -3,14 +3,14 @@ const uploadPath = require('../config/env').uploadPath
 const { saveArchive } = require('../lib/archive')
 
 const maxArchive = (req, res)  => {
-  db.get('SELECT COALESCE(MAX(id)+1, 0) AS count FROM archive', function(err, result) {
+  db.get('SELECT COALESCE(MAX(id), 0) AS count FROM archive', function(err, result) {
     if (err) return res.status(404).json({ err: err.message })
     res.status(200).json(result.count)
   })
 }
 
 const randArchive = (req, res)  => {
-  db.get('SELECT COALESCE(MAX(id)+1, 0) AS count FROM archive', function(err, result) {
+  db.get('SELECT COALESCE(MAX(id), 0) AS count FROM archive', function(err, result) {
     if (err) return res.status(404).json({ err: err.message })
     console.log(result.count)
     const rand = Math.floor(Math.random() * (result.count - 1 + 1)) + 1;

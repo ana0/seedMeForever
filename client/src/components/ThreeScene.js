@@ -10,7 +10,7 @@ class ThreeScene extends Component{
     this.width = width;
     this.height = height;
 
-    this.highestArchive = 1;
+    this.highestArchive = 0;
     this.maxDisplays = 6;
 
     this.scene = new THREE.Scene()
@@ -163,6 +163,7 @@ class ThreeScene extends Component{
         this.highestArchive = max;
         this.maxDisplays = 6;
       } else if (this.maxDisplays > 0) {
+        console.log('middle path')
         this.createAnimal(max);
         this.maxDisplays -= 1;
       } else {

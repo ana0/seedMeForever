@@ -26,4 +26,4 @@ A memorial to biodiversity loss on the p2p web
 - [x] change favicon and title
 - [ ] thank you page
 - [ ] change comment text
-- [ ] pause on new image
+- [x] pause on new image
