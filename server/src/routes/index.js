@@ -21,8 +21,12 @@ const upload = multer({ storage, fileFilter: imageFilter })
 
 const corsOptions = {
   origin: [
+    'http://localhost:3000',
+    'http://localhost:3000/',
     'https://remembering.network',
-    'https://www.remembering.network'
+    'https://www.remembering.network',
+    'https://www.remembering.network/',
+    'https://remembering.network/',
   ],
   credentials: true,
   optionsSuccessStatus: 200
