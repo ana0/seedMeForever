@@ -1,41 +1,62 @@
+@import url("https://fonts.googleapis.com/css?family=Encode+Sans:regular")
+
+body {
+  font-family: 'Encode Sans', sans-serif;
+}
+
+input[type=button] {
+  font-family: 'Encode Sans', sans-serif;
+}
+
 h2 {
+  font-family: 'Encode Sans', sans-serif;
   padding: 10px;
 }
 
 .instructions {
+  color: #515152;
+  font-family: 'Encode Sans', sans-serif;
   padding: 10px;
 }
 
 .instructionsButton {
+  font-family: 'Encode Sans', sans-serif;
   margin: 10px;
   padding-left: 10px;
   padding-right: 10px;
 }
 
 .form {
+  color: #515152;
+  font-family: 'Encode Sans', sans-serif;
   padding: 10px;
 }
 
 .animal {
+  font-style: italic;
+  font-family: 'Encode Sans', sans-serif;
   width: 100%;
   text-align: center;
-  color: #666666;
+  color: #bf5426;
   margin-top: 10px;
   margin-bottom: 30px;
 }
 
 .fileupload {
+  font-family: 'Encode Sans', sans-serif;
   margin-top: 5px;
   margin-bottom: 5px;
 }
 
 .comments {
+  font-family: 'Encode Sans', sans-serif;
   width: 95%;
   margin-top: 5px;
   margin-bottom: 5px;
 }
 
 .content {
+  font-family: 'Encode Sans', sans-serif;
   width: 95%;
   max-width: 500px;
   margin-right: auto;
