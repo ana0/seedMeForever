@@ -14,7 +14,6 @@ const storage = multer.diskStorage({
     var ext = file.mimetype.split('/')[1];
     return cb(null, Date.now() + "." + ext);
   },
-  // limits: { fileSize: 10000000 }
 })
 
 const upload = multer({ storage, fileFilter: imageFilter })

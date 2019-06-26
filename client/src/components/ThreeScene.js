@@ -11,6 +11,7 @@ class ThreeScene extends Component{
     this.height = height;
 
     this.highestArchive = 1;
+    this.maxDisplays = 6;
 
     this.scene = new THREE.Scene()
 
@@ -160,6 +161,10 @@ class ThreeScene extends Component{
       if (max > this.highestArchive) { 
         this.createAnimal(max);
         this.highestArchive = max;
+        this.maxDisplays = 6;
+      } else if (this.maxDisplays > 0) {
+        this.createAnimal(max);
+        this.maxDisplays -= 1;
       } else {
         const id = this.getRand()
         this.createAnimal(id);

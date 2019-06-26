@@ -51,7 +51,7 @@ class ImageForm extends Component {
       return alert('Please attach an image of your animal')
     }
     if (!this.state.humanName) {
-      return alert("Please lookup your animal's common English name")
+      return alert("Please lookup your animal's common english name")
     }
     const data = new FormData()
     data.append('animal', this.state.file)
@@ -63,7 +63,7 @@ class ImageForm extends Component {
       headers: {
         "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
         "Accept-Encoding": "gzip, deflate, br",
-        "Accept-Language": "en-CA,en-US;q=0.7,en;q=0.3"
+        "Accept-Language": "en-CA,en-US;q=0.7,en;q=0.3",
       },
       credentials: 'include',
       method: 'POST',
@@ -71,9 +71,8 @@ class ImageForm extends Component {
     })
     .then(response => {
       this.props.handleConsent(false)
-      console.log(`${apiUrl}/animals/${this.state.id}`)
       if (response.status === 200) {
-        return alert('Success! Your animal was submitted')
+        return alert('Thank you for contributing')
       } else {
         return alert('Something is broken x_x please try again later')
       }
@@ -90,7 +89,7 @@ class ImageForm extends Component {
             <p className="instructions">Your animal is:</p>
             <div className="animal">{this.state.animal}</div>
             <div className="form">
-              English name:&nbsp;&nbsp;
+              Common name:&nbsp;&nbsp;
               <input
                 type="text"
                 name="humanName"

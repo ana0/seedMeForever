@@ -23,3 +23,7 @@ A memorial to biodiversity loss on the p2p web
 - [x] display of ipfs photos
 - [ ] display of ipfs hash/data blob
 - [x] most recent animal displays next
+- [x] change favicon and title
+- [ ] thank you page
+- [ ] change comment text
+- [ ] pause on new image

@@ -20,7 +20,7 @@ class Home extends Component {
   render() {
     return (
     <div className="content">
-      <h2>seed me forever</h2>
+      <h2>remembering network</h2>
       { !this.state.consent ?
         <ConsentForm handleConsent={this.handleConsent.bind(this)} /> :
         null }
