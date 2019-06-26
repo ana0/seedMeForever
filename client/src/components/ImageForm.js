@@ -9,7 +9,8 @@ class ImageForm extends Component {
       animal: '',
       id: '',
       file: null,
-      humanName: ''
+      humanName: '',
+      comments: ''
     };
   }
 
@@ -38,6 +39,11 @@ class ImageForm extends Component {
     this.setState({ humanName })
   }
 
+  onCommentsChange(event) {
+    const comments = event.target.value.toLowerCase();
+    this.setState({ comments })
+  }
+
   handleUpload(event) {
     event.preventDefault();
     const data = new FormData()
@@ -59,21 +65,33 @@ class ImageForm extends Component {
     return (
       <form>
         <div>
-            <p>Your animal is:</p>
-            <p>{this.state.animal}</p>
-            <br />
-            english name: 
+            <p className="instructions">Your animal is:</p>
+            <div className="animal">{this.state.animal}</div>
+            <div className="form">
+              English name:&nbsp;&nbsp;
+              <input
+                type="text"
+                name="humanName"
+                onChange={this.onTextChange.bind(this)} />
+              <br />
+              <br />
+              Choose a photo of your animal:<br />
+              <input
+                className="fileupload"
+                type="file"
+                name="animal"
+                onChange={this.onFilesAdded.bind(this)} />
+              <br />
+              <br />
+              Would you like to add any other comments?<br />
+              <input
+                className="comments"
+                type="text"
+                name="comments"
+                onChange={this.onCommentsChange.bind(this)} />
+            </div>
             <input
-              type="text"
-              name="humanName"
-              onChange={this.onTextChange.bind(this)} />
-            <br />
-            <input
-              type="file"
-              name="animal"
-              onChange={this.onFilesAdded.bind(this)} />
-            <br />
-            <input
+              className="instructionsButton"
               type="button"
               value="Pin"
               onClick={this.handleUpload.bind(this)}

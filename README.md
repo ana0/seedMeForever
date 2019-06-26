@@ -14,8 +14,9 @@ A memorial to biodiversity loss on the p2p web
 - [x] handle if ipfs is down
 - [x] handle if no such photo is requested
 - [ ] user form error handling
-- [ ] form styling
+- [x] form styling
 - [x] api call to return rand file
+- [ ] photo upload is a dropzone
 - [x] human name
 - [x] upload animal photos to ipfs
 - [ ] more artful use of ipfs

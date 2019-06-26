@@ -1,0 +1,36 @@
+h2 {
+  padding: 10px;
+}
+
+.instructions {
+  padding: 10px;
+}
+
+.instructionsButton {
+  margin: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.form {
+  padding: 10px;
+}
+
+.animal {
+  width: 100%;
+  text-align: center;
+  color: #666666;
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+
+.fileupload {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.comments {
+  width: 95%;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
