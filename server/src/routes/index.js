@@ -33,6 +33,7 @@ module.exports = (app) => {
   app.post('/animals/:id', upload.single('animal'), archive.createArchive)
 
   app.get('/archive', archive.randArchive)
+  app.get('/archive/max', archive.maxArchive)
   app.get('/archive/:id', archive.readFile)
 }
 

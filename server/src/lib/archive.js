@@ -18,7 +18,7 @@ const saveArchive = (req, res) => {
           if (err) return reject(err)
           db.run(`UPDATE animals SET archiveId = ${this.lastID} WHERE id = ${req.params.id};`, function(err) {
             if (err) return reject(err)
-            return resolve('Uploaded animal file');
+            return resolve({ msg: 'Uploaded animal file', id: this.lastID });
           })
         })
     })

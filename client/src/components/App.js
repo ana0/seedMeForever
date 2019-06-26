@@ -5,16 +5,6 @@ import ConsentForm from './ConsentForm';
 import ImageForm from './ImageForm';
 import Display from './Display';
 
-// class Viewer extends Component {
-//   render() {
-//     return (
-//       <div>
-//         <Display />
-//       </div>
-//     )
-//   }
-// }
-
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -35,7 +25,7 @@ class Home extends Component {
         <ConsentForm handleConsent={this.handleConsent.bind(this)}/> :
         null }
       { this.state.consent ?
-        <ImageForm handleConsent={this.handleConsent.bind(this)}/> :
+        <ImageForm /> :
         null }
     </div>
     )
@@ -54,8 +44,8 @@ class App extends Component {
     return (
       <div className="App">
         <Switch>
-          <Route exact path="/" component={Home}/>
-          <Route path="/display" component={Display}/>
+          <Route exact path="/" component={Home} />
+          <Route path="/display" component={Display} />
         </Switch>
       </div>
     )

@@ -16,10 +16,9 @@ A memorial to biodiversity loss on the p2p web
 - [ ] user form error handling
 - [ ] form styling
 - [x] api call to return rand file
-- [ ] photo upload is a dropzone
 - [x] human name
 - [x] upload animal photos to ipfs
 - [ ] more artful use of ipfs
 - [x] display of ipfs photos
 - [ ] display of ipfs hash/data blob
-- [ ] most recent animal displays next
+- [x] most recent animal displays next

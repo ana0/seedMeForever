@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import * as THREE from 'three';
 import smoke from '../assets/Smoke-Element.png';
-import { apiUrl } from './../env'
+import { apiUrl } from './../env';
 
 class ThreeScene extends Component{
   componentDidMount(){
@@ -9,6 +9,8 @@ class ThreeScene extends Component{
     const height = this.mount.clientHeight
     this.width = width;
     this.height = height;
+
+    this.highestArchive = 1;
 
     this.scene = new THREE.Scene()
 
@@ -58,11 +60,29 @@ class ThreeScene extends Component{
     return Math.floor(x * (max - min) + min);
   }
 
-  createAnimal() {
+  getRand() {
+    const rand = Math.floor(Math.random() * (this.highestArchive - 1 + 1)) + 1;
+    console.log(rand)
+    return rand;
+  }
+
+  getMax() {
+    return fetch(`${apiUrl}/archive/max`, {
+    method: "GET",
+    headers: {
+      "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
+    }})
+      .then(response => {
+        console.log(response)
+        return response.json()
+      })
+  }
+
+  async createAnimal(id) {
     const picGeo = new THREE.PlaneGeometry(300,300);
-    THREE.ImageUtils.crossOrigin = ''; //Need this to pull in crossdomain images from AWS
     let pic;
-    const picTexture = new THREE.TextureLoader().load(`${apiUrl}/archive/1`, (tex) => {
+    THREE.ImageUtils.crossOrigin = '';
+    const picTexture = new THREE.TextureLoader().load(`${apiUrl}/archive/${id}`, (tex) => {
       tex.needsUpdate = true;
       pic.scale.set(1.0, tex.image.height / tex.image.width, 1.0);
     });
@@ -128,13 +148,23 @@ class ThreeScene extends Component{
     cancelAnimationFrame(this.frameId)
   }
 
-  animate = () => {
+  animate = async () => {
     // note: three.js includes requestAnimationFrame shim
     this.delta = this.clock.getDelta();
     requestAnimationFrame( this.animate );
     this.evolveSmoke();
     this.fadeAnimals();
-    if (Math.floor(Math.random() * 100) % 100 === 0) { this.createAnimal() }
+    if (Math.floor(Math.random() * 100) % 100 === 0) {
+      const max = await this.getMax();
+      console.log('max: ', max)
+      if (max > this.highestArchive) { 
+        this.createAnimal(max);
+        this.highestArchive = max;
+      } else {
+        const id = this.getRand()
+        this.createAnimal(id);
+      }
+    }
     this.renderScene();
  }
 
