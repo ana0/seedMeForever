@@ -46,6 +46,7 @@ class ImageForm extends Component {
 
   handleUpload(event) {
     event.preventDefault();
+    //event.nativeEvent.stopImmediatePropagation();
     if (!this.state.file) {
       return alert('Please attach an image of your animal')
     }
@@ -65,10 +66,12 @@ class ImageForm extends Component {
     .then(response => {
       if (response.status === 200) {
         alert('Success! Your animal was submitted')
+        this.props.handleConsent(false)
       } else {
         alert('Something is broken x_x please try again later')
+        this.props.handleConsent(false)
       }
-      this.props.handleConsent(false)
+
     })
 
   }
