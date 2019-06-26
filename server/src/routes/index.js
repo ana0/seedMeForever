@@ -19,8 +19,20 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage, fileFilter: imageFilter })
 
+const whitelist = ['https://remembering.network', 'https://www.remembering.network']
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
+}
+
 module.exports = (app) => {
-  app.use(cors())
+  app.use(cors(corsOptions))
+
   app.use(bodyParser.urlencoded({ extended: true }))
   app.use(bodyParser.json())
 

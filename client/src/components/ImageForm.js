@@ -60,6 +60,7 @@ class ImageForm extends Component {
     data.append('id', this.state.id)
     data.append('comments', this.state.comments)
     return fetch(`${apiUrl}/animals/${this.state.id}`, {
+      credentials: 'include',
       method: 'POST',
       body: data,
     })
