@@ -11,10 +11,10 @@ const imageFilter = require('../lib/images').imageFilter
 const storage = multer.diskStorage({
   destination: uploadPath,
   filename: function (req, file, cb) {
-    console.log(file.mimetype);
-    cb(null, Date.now() + '.jpg') //Appending .jpg
+    var ext = file.mimetype.split('/')[1];
+    return cb(null, Date.now() + "." + ext);
   },
-  limits: { fileSize: 10000000 }
+  // limits: { fileSize: 10000000 }
 })
 
 const upload = multer({ storage, fileFilter: imageFilter })
