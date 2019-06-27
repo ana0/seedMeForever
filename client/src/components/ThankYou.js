@@ -32,7 +32,9 @@ class ThankYou extends Component {
         <p className="instructions">Thank you for contributing!</p>
         <p
           className="instructions"
-          style={{'wordWrap': 'break-word', 'overflowWrap': 'break-word'}}>{`${this.state.animal} is now archived at ${this.state.hash}`}</p>
+          style={{'wordWrap': 'break-word', 'overflowWrap': 'break-word'}}>
+          {`${this.state.animal} is now archived at `}
+          <a href={`${this.state.hash}`}>{this.state.hash}</a></p>
       </div>
     )
   }
