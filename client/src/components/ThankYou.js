@@ -21,7 +21,7 @@ class ThankYou extends Component {
         return response.json()
       })
       .then(data => {
-        this.setState({ hash: data.hash.toLowerCase(), animal: data.name })
+        this.setState({ hash: data.hash, animal: data.name })
       })
 
   }

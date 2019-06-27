@@ -14,8 +14,8 @@ const saveArchive = (req, res) => {
     db.get(`SELECT id, name, archiveId FROM animals WHERE id == ${req.params.id} AND archiveId IS NULL`, function(err, result) {
       if (err) return reject(err)
       if (!result) return reject(new Error('Animal is already registered or invalid!'))
-      db.run("INSERT INTO archive(scientificName, name, filename, hash) VALUES (?, ?, ?, ?)",
-        [req.body.scientificName, req.body.humanName, req.file.filename, hash], function(err) {
+      db.run("INSERT INTO archive(scientificName, name, filename, hash) VALUES (?, ?, ?, ?, ?)",
+        [req.body.scientificName, req.body.humanName, req.file.filename, hash, req.body.comments], function(err) {
           if (err) return reject(err)
           db.run(`UPDATE animals SET archiveId = ${this.lastID} WHERE id = ${req.params.id};`, function(err) {
             if (err) return reject(err)

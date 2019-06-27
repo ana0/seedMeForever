@@ -106,7 +106,7 @@ class ImageForm extends Component {
                 onChange={this.onFilesAdded.bind(this)} />
               <br />
               <br />
-              Would you like to add any other comments?<br />
+              Would you like to say anything to this animal, if you could?<br />
               <input
                 className="comments"
                 type="text"
