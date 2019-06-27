@@ -12,7 +12,6 @@ export default function (p) {
     p.imageMode(p.CENTER);
     bird = p.loadImage('http://localhost:8888/archive/1')
     p.image(bird, 0, 0)
-    //img = p.loadImage('https://s3-us-west-2.amazonaws.com/s.cdpn.io/95637/Smoke-Element.png')
     img = p.loadImage(smoke)
     flock = new Flock();
     // Add an initial set of boids into the system

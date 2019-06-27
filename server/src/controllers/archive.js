@@ -35,7 +35,10 @@ const readFile = (req, res) => {
 }
 
 const readArchive = (req, res)  => {
-  db.get(`SELECT id, name, filename, scientificName FROM archive WHERE id == ${req.params.id}`, function(err, animal) {
+  if (req.params.id === undefined || req.params.id === null) {
+    return res.status(400).json({ err: 'Invalid params' })
+  }
+  db.get(`SELECT id, name, filename, scientificName, hash FROM archive WHERE id == ${req.params.id}`, function(err, animal) {
     if (err) throw err;
     res.status(200).json(animal)
   })

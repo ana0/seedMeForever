@@ -10,7 +10,7 @@ class ThreeScene extends Component{
     this.width = width;
     this.height = height;
 
-    this.highestArchive = 0;
+    this.highestArchive = 1;
     this.maxDisplays = 6;
 
     this.scene = new THREE.Scene()

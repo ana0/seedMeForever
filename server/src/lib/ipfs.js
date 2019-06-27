@@ -10,7 +10,7 @@ const pin = (animal) => {
           console.error(err)
           return rej(err)
         }
-        let url = `https://ipfs.io/ipfs/${result[0].hash}`
+        let url = `https://gateway.ipfs.io/ipfs/${result[0].hash}`
         res(url)
       })
     })

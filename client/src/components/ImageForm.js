@@ -70,13 +70,15 @@ class ImageForm extends Component {
       body: data,
     })
     .then(response => {
-      this.props.handleConsent(false)
-      if (response.status === 200) {
-        return alert('Thank you for contributing')
-      } else {
+      if (response.status !== 200) {
+        this.props.handleConsent(0)
         return alert('Something is broken x_x please try again later')
       }
-
+      return response.json()
+    })
+    .then(data => {
+      this.props.handleArchiveId(data.id)
+      this.props.handleConsent(2)
     })
     .catch(err => alert(err.toString()))
 
