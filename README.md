@@ -21,9 +21,9 @@ A memorial to biodiversity loss on the p2p web
 - [x] upload animal photos to ipfs
 - [ ] more artful use of ipfs
 - [x] display of ipfs photos
-- [ ] display of ipfs hash/data blob
+- [x] display of ipfs hash/data blob
 - [x] most recent animal displays next
 - [x] change favicon and title
 - [x] thank you page
-- [ ] change comment text
+- [x] change comment text
 - [x] pause on new image
