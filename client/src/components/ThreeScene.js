@@ -4,7 +4,7 @@ import smoke from '../assets/Smoke-Element.png';
 import { apiUrl } from './../env';
 
 class ThreeScene extends Component{
-  componentDidMount(){
+  async componentDidMount(){
     const width = this.mount.clientWidth
     const height = this.mount.clientHeight
     this.width = width;
@@ -42,14 +42,16 @@ class ThreeScene extends Component{
     this.planeGeo = new THREE.PlaneGeometry(300, 300);
 
     this.createSmoke();
-    this.createAnimal();
+
+    this.highestArchive = await this.getMax()
+    this.createAnimals(this.highestArchive);
 
     this.start()
   }
 
   createSmoke() {
     for (let p = 0; p < 100; p++) {
-      var particle = new THREE.Mesh(this.planeGeo, this.smokeMaterial);
+      const particle = new THREE.Mesh(this.planeGeo, this.smokeMaterial);
       particle.position.set(Math.random()*500-250, Math.random()*500-250, Math.random()*1000-100);
       particle.rotation.z = Math.random() * 360;
       this.scene.add(particle);
@@ -57,69 +59,57 @@ class ThreeScene extends Component{
     }
   }
 
-  random(min, max) {
-    var x = Math.abs(Math.sin(Math.random()));
-    return Math.floor(x * (max - min) + min);
-  }
-
-  getRand() {
-    const rand = Math.floor(Math.random() * (this.highestArchive - 1 + 1)) + 1;
-    // console.log(rand)
-    return rand;
-  }
-
-  getMax() {
-    return fetch(`${apiUrl}/archive/max`, {
-    method: "GET",
-    headers: {
-      "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
-    }})
-      .then(response => {
-        // console.log(response)
-        return response.json()
+  createAnimals(id) {
+    for (let p = 0; p < 5; p++) {
+      let pic;
+      THREE.ImageUtils.crossOrigin = '';
+      const picTexture = new THREE.TextureLoader().load(`${apiUrl}/archive/${id}`, (tex) => {
+        tex.needsUpdate = true;
+        pic.scale.set(1.0, tex.image.height / tex.image.width, 1.0);
+      });
+      const picMaterial = new THREE.MeshLambertMaterial({color: 0xbbffff, opacity: 0, map: picTexture, transparent: true, blending: THREE.AdditiveBlending})
+      pic = new THREE.Mesh(this.planeGeo, picMaterial);
+      pic.position.z = 800;
+      const randx = this.random((this.width/6) * -1, this.width/6);
+      const randy = this.random((this.height/6) * -1, this.height/6);
+      pic.position.x = randx;
+      pic.position.y = randy;
+      this.animals.push({
+        mesh: pic,
+        opacity: .0001,
+        lastOpacity: 0,
+        period: this.random(50, 600)
       })
-  }
-
-  async createAnimal(id) {
-    let pic;
-    THREE.ImageUtils.crossOrigin = '';
-    const picTexture = new THREE.TextureLoader().load(`${apiUrl}/archive/${id}`, (tex) => {
-      tex.needsUpdate = true;
-      pic.scale.set(1.0, tex.image.height / tex.image.width, 1.0);
-    });
-    const picMaterial = new THREE.MeshLambertMaterial({color: 0xbbffff, opacity: 1, map: picTexture, transparent: true, blending: THREE.AdditiveBlending})
-    pic = new THREE.Mesh(this.planeGeo, picMaterial);
-    pic.position.z = 800;
-    var randx = this.random((this.width/6) * -1, this.width/6);
-    var randy = this.random((this.height/6) * -1, this.height/6);
-    pic.position.x = randx;
-    pic.position.y = randy;
-    this.animals.push({ mesh: pic, opacity: .0001, lastOpacity: 0 })
-    this.scene.add(pic);
-  }
-
-  evolveSmoke() {
-    var sp = this.smokeParticles.length;
-    while(sp--) {
-      this.smokeParticles[sp].rotation.z += (this.delta * 0.2);
+      this.scene.add(pic);
     }
   }
 
-  fadeAnimals() {
+  evolveAnimals() {
     let sp = this.animals.length;
     while(sp--) {
       const animal = this.animals[sp];
+      if (animal.period !== 0) {
+        animal.period -= 1;
+        break;
+      }
+      if (animal.opacity <= 0) {
+        const randx = this.random((this.width/6) * -1, this.width/6);
+        const randy = this.random((this.height/6) * -1, this.height/6);
+        animal.mesh.position.x = randx;
+        animal.mesh.position.y = randy;
+        animal.mesh.material.map.dispose();
+        animal.mesh.material.map = new THREE.TextureLoader().load(`${apiUrl}/archive/${this.random(1, this.highestArchive)}`, (tex) => {
+          tex.needsUpdate = true;
+          animal.mesh.scale.set(1.0, tex.image.height / tex.image.width, 1.0);
+        });
+        animal.opacity = .0001;
+        animal.lastOpacity = 0;
+        animal.period = this.random(50, 600)
+        break;
+      }
       if (animal.opacity >= 1) {
         animal.lastOpacity = 1
         animal.opacity = 0.99
-      } else if (animal.opacity <= 0) {
-        this.scene.remove( animal );
-        // console.log(animal.mesh.material)
-        animal.mesh.material.map.dispose();
-        animal.mesh.material.dispose();
-        animal.mesh.geometry.dispose();
-        this.animals.splice(sp, 1)
-        break;
       } else if (animal.opacity > animal.lastOpacity
           || animal.opacity === animal.lastOpacity
         ) {
@@ -130,6 +120,34 @@ class ThreeScene extends Component{
         animal.opacity -= (this.delta * 0.2);
       }
       animal.mesh.material.opacity = animal.opacity
+    }
+  }
+
+  random(min, max) {
+    const x = Math.abs(Math.sin(Math.random()));
+    return Math.floor(x * (max - min) + min);
+  }
+
+  getRand() {
+    const rand = Math.floor(Math.random() * (this.highestArchive)) + 1;
+    return rand;
+  }
+
+  getMax() {
+    return fetch(`${apiUrl}/archive/max`, {
+    method: "GET",
+    headers: {
+      "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
+    }})
+      .then(response => {
+        return response.json()
+      })
+  }
+
+  evolveSmoke() {
+    let sp = this.smokeParticles.length;
+    while(sp--) {
+      this.smokeParticles[sp].rotation.z += (this.delta * 0.2);
     }
   }
 
@@ -148,26 +166,11 @@ class ThreeScene extends Component{
     cancelAnimationFrame(this.frameId)
   }
 
-  animate = async () => {
-    // note: three.js includes requestAnimationFrame shim
+  animate = () => {
     this.delta = this.clock.getDelta();
     requestAnimationFrame( this.animate );
     this.evolveSmoke();
-    this.fadeAnimals();
-    if (Math.floor(Math.random() * 100) % 200 === 0) {
-      const max = await this.getMax();
-      if (max > this.highestArchive) { 
-        this.createAnimal(max);
-        this.highestArchive = max;
-        this.maxDisplays = 6;
-      } else if (this.maxDisplays > 0) {
-        this.createAnimal(max);
-        this.maxDisplays -= 1;
-      } else {
-        const id = this.getRand()
-        this.createAnimal(id);
-      }
-    }
+    this.evolveAnimals();
     this.renderScene();
  }
 
