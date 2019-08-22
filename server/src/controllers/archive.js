@@ -3,17 +3,16 @@ const uploadPath = require('../config/env').uploadPath
 const { saveArchive } = require('../lib/archive')
 
 const maxArchive = (req, res)  => {
-  db.get('SELECT COALESCE(MAX(id), 0) AS count FROM archive', function(err, result) {
+  db.get('SELECT COALESCE(MAX(id), 0) AS count FROM archive WHERE approved = 1', function(err, result) {
     if (err) return res.status(404).json({ err: err.message })
     res.status(200).json(result.count)
   })
 }
 
 const randArchive = (req, res)  => {
-  db.get('SELECT COALESCE(MAX(id), 0) AS count FROM archive', function(err, result) {
+  db.get('SELECT COALESCE(MAX(id), 0) AS count FROM archive WHERE approved == 1', function(err, result) {
     if (err) return res.status(404).json({ err: err.message })
-    console.log(result.count)
-    const rand = Math.floor(Math.random() * (result.count - 1 + 1)) + 1;
+    const rand = Math.floor(Math.random() * (result.count)) + 1;
     db.get(`SELECT id, name, scientificName, hash FROM archive WHERE id == ${rand}`, function(err, animal) {
       if (err) throw err;
       res.status(200).json(animal)
@@ -27,7 +26,6 @@ const readFile = (req, res) => {
     if (!animal) return res.status(404).json({ err: 'No such animal' })
     res.sendFile(process.cwd() + '/uploads/' + animal.filename, function (err) {
       if (err) {
-        console.log(err);
         res.status(err.status).end();
       }
     })

@@ -34,14 +34,18 @@ const process = () => {
 
 const createAnimals = async () => {
   console.log('called create animals')
-
-  return process().then(() => {
-    console.log('done')
-    //unlink(__dirname + "/taxonomy.csv", () => {});
-  }).catch((e) => {
-    console.log(e);
-    //unlink(__dirname + "/taxonomy.csv", () => {});
-  });
+  db.get('SELECT COUNT()FROM animals', function(err, count) {
+    if (err) throw err;
+    if (count == 0) {
+      return process().then(() => {
+        console.log('done')
+        //unlink(__dirname + "/taxonomy.csv", () => {});
+      }).catch((e) => {
+        console.log(e);
+        //unlink(__dirname + "/taxonomy.csv", () => {});
+      });
+    }
+  })
 }
 
 
