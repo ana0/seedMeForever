@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/ana0/seedMeForever#readme",
   "dependencies": {
-    "bcrypt": "^3.0.4",
+    "bcrypt": "^5.0.0",
     "body-parser": "^1.18.3",
     "cors": "^2.8.5",
     "csv": "^5.1.1",
