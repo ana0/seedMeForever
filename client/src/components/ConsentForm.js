@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from "react-router-dom";
 import './../index.css'
 
 class ConsentForm extends Component {
@@ -14,17 +15,22 @@ class ConsentForm extends Component {
     };
   }
 
+  
+
   render() {
     return (
       <form>
         <div>
             <p className="instructions" style={{ whiteSpace: 'pre-wrap' }}>{this.state.instructions}</p>
-            <input
+            {/* <input
               className="instructionsButton"
               type="button"
               value="Yes"
               onClick={() => this.props.handleConsent(1)}
-              />
+              /> */}
+            <p className="instructions disabled" style={{ whiteSpace: 'pre-wrap' }}>The memorial is currently closed for submissions</p>
+            <Link to="/display"
+              ><button className="instructionsButton">View Memorial</button></Link>
           </div>
       </form>
     )

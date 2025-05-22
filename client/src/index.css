@@ -19,6 +19,10 @@ h2 {
   padding: 10px;
 }
 
+.disabled {
+  color: #c6c3c3 !important;
+}
+
 .instructionsButton {
   font-family: 'Encode Sans', sans-serif;
   margin: 10px;
